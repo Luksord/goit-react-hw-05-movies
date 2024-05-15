@@ -1,0 +1,18 @@
+.header {
+  height: 100px;
+  width: 100%;
+  border-bottom: 1px solid black;
+}
+
+.navWrap {
+  display: flex;
+  gap: 25px;
+  padding-top: 35px;
+  padding-left: 90px;
+}
+
+.navLink {
+  font-size: 25px;
+  font-weight: 600;
+  text-decoration: none;
+}

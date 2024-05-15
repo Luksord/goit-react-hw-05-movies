@@ -1,0 +1,22 @@
+.formContainer {
+  padding-top: 25px;
+  padding-left: 80px;
+  margin-bottom: 25px;
+}
+
+.input {
+  height: 25px;
+  width: 250px;
+  border-radius: 8px;
+  padding-left: 10px;
+  margin-right: 10px;
+}
+
+.button {
+  font-size: 16px;
+  font-weight: 400;
+  height: 30px;
+  width: 80px;
+  cursor: pointer;
+  border-radius: 8px;
+}

@@ -1,26 +1,29 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 // import css from './Reviews.module.css';
+import { fetchReview } from 'Api';
 
 export const Reviews = () => {
   const [movieReview, setMovieReview] = useState([]);
   const { movieId } = useParams();
 
+  // const fetchReview = async id => {
+  //   try {
+  //     const apiKey = '9ab98cc995e90e847ed7e427106bcbaf';
+  //     const response = await axios.get(
+  //       `https://api.themoviedb.org/3/movie/${id}/reviews&language=en-US&api_key=${apiKey}`
+  //     );
+  //     console.log(response.data);
+  //     setMovieReview(response.data);
+  //   } catch (error) {
+  //     console.error('Error fetching movie reviews:', error);
+  //   }
+  // };
+
   useEffect(() => {
-    const fetchReview = async movieId => {
-      try {
-        const apiKey = '9ab98cc995e90e847ed7e427106bcbaf';
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/${movieId}/reviews&language=en-US&api_key=${apiKey}`
-        );
-        console.log(response.data.results);
-        setMovieReview(response.data.results);
-      } catch (error) {
-        console.error('Error fetching movie reviews:', error);
-      }
-      fetchReview();
-    };
+    if (!movieId) return;
+    fetchReview(movieId).then(setMovieReview);
   }, [movieId]);
 
   return (

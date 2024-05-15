@@ -1,41 +1,31 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
+import { fetchTrending } from 'Api';
 
 export const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
   const location = useLocation();
 
+  // useEffect(() => {
+  //   const fetchTrending = async () => {
+  //     try {
+  //       const apiKey = '9ab98cc995e90e847ed7e427106bcbaf';
+  //       const response = await axios.get(
+  //         `https://api.themoviedb.org/3/trending/movie/day?language=en-US?api_key=${apiKey}`
+  //       );
+  //       console.log(response.data.results);
+  //       setTrendingMovies(response.data.results);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
+  //   fetchTrending();
+  // }, []);
+
   useEffect(() => {
-    const fetchTrending = async () => {
-      try {
-        const apiKey = '9ab98cc995e90e847ed7e427106bcbaf';
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/trending/movie/day?language=en-US?api_key=${apiKey}`
-        );
-        console.log(response.data.results);
-      } catch (error) {
-        console.error(error);
-      }
-      setTrendingMovies(response.data.results);
-    };
-    fetchTrending();
+    fetchTrending().then(setTrendingMovies);
   }, []);
-  // const options = {
-  //   method: 'GET',
-  //   headers: {
-  //     accept: 'application/json',
-  //     Authorization:
-  //       'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5YWI5OGNjOTk1ZTkwZTg0N2VkN2U0MjcxMDZiY2JhZiIsInN1YiI6IjY2M2E5NWE0Mjc4MDA5MjcxYjVkZGVmMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.xG4YTZpkqtUdEEIWdcqUEthtzjGlJjSNN3BLQGa_jz8',
-  //   },
-  // };
-  // fetch(
-  //   'https://api.themoviedb.org/3/trending/movie/day?language=en-US',
-  //   options
-  // )
-  //   .then(response => response.json())
-  //   .then(response => console.log(response))
-  //   .catch(error => console.error(error));
 
   return (
     <>
