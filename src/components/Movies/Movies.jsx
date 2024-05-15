@@ -1,15 +1,14 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { Link, useLocation } from 'react-router-dom';
+// import axios from 'axios';
 import css from './Movies.module.css';
 import { fetchMovies } from 'Api';
 
 export const Movies = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  // const [page, setPage] = useState(1);
   const [searchResults, setSearchResults] = useState([]);
   const [searched, setSearched] = useState(false);
-  const navigate = useNavigate();
+  const location = useLocation();
 
   // const fetchMovies = async query => {
   //   try {
@@ -26,7 +25,7 @@ export const Movies = () => {
   //   }
   // };
 
-  const handleSubmit = async event => {
+  const handleSearch = async event => {
     event.preventDefault();
     if (searchQuery.trim() === '') {
       alert('Please enter a search query');
@@ -99,7 +98,7 @@ export const Movies = () => {
 
   return (
     <div>
-      <form className={css.formContainer} onSubmit={handleSubmit}>
+      <form className={css.formContainer} onSubmit={handleSearch}>
         <input
           className={css.input}
           type="text"
@@ -117,7 +116,13 @@ export const Movies = () => {
           <ul>
             {searchResults.map(result => (
               <li key={result.id}>
-                <Link to={`/movies/${result.id}`}>{result.title}</Link>
+                <Link
+                  key={result.id}
+                  to={`/movies/${result.id}`}
+                  state={{ from: location }}
+                >
+                  {result.title}
+                </Link>
               </li>
             ))}
           </ul>
