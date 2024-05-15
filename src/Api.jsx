@@ -60,24 +60,24 @@ export const fetchMovieDetails = async movieId => {
 export const fetchCast = async movieId => {
   try {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/movie/${movieId}/credits&language=en-US`,
+      `https://api.themoviedb.org/3/movie/${movieId}/credits?language=en-US`,
       options
     );
-    console.log(response.data);
-    return response.data;
+    console.log(response.data.cast);
+    return response.data.cast;
   } catch (error) {
     console.error('Error fetching movie cast:', error);
   }
 };
 
-export const fetchReview = async movieId => {
+export const fetchReviews = async movieId => {
   try {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/movie/${movieId}/reviews&language=en-US`,
+      `https://api.themoviedb.org/3/movie/${movieId}/reviews?language=en-US&page=1`,
       options
     );
-    console.log(response.data);
-    return response.data;
+    console.log(response.data.results);
+    return response.data.results;
   } catch (error) {
     console.error('Error fetching movie reviews:', error);
   }

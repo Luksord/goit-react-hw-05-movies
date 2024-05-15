@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 // import axios from 'axios';
 // import css from './Reviews.module.css';
-import { fetchReview } from 'Api';
+import { fetchReviews } from 'Api';
 
 export const Reviews = () => {
-  const [movieReview, setMovieReview] = useState([]);
+  const [movieReview, setMovieReview] = useState(null);
   const { movieId } = useParams();
 
   // const fetchReview = async id => {
@@ -23,8 +23,12 @@ export const Reviews = () => {
 
   useEffect(() => {
     if (!movieId) return;
-    fetchReview(movieId).then(setMovieReview);
+    fetchReviews(movieId).then(setMovieReview);
   }, [movieId]);
+
+  if (!movieReview) {
+    return;
+  }
 
   return (
     <>
@@ -38,7 +42,7 @@ export const Reviews = () => {
           ))}
         </ul>
       ) : (
-        'We dont have any reviews for this movie'
+        'There is no review of this film yet'
       )}
     </>
   );
